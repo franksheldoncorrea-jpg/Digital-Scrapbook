@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Notes for Frank: A Scrapbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6efe3; --paper:#fffdf8; --ink:#33291f; --muted:#7a6c5c; --line:#e6d9c4;
+  --accent:#c4572f; --accent-ink:#fff; --tape:#f2c94c99; --chip:#f1e4cd; --chip-on:#c4572f;
+  --c1:#fff3b8; --c2:#d6f0e0; --c3:#fbd9d3; --c4:#d9e6fb; --shadow:0 6px 18px #5a3d1f26;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#201a14; --paper:#2b231b; --ink:#f3e9d9; --muted:#b5a58f; --line:#4a3d2e;
+    --accent:#e07a50; --accent-ink:#1d140d; --tape:#e0b84a66; --chip:#3a2f23; --chip-on:#e07a50;
+    --c1:#4a4224; --c2:#264034; --c3:#4d2c27; --c4:#26354f; --shadow:0 6px 18px #0008;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#201a14; --paper:#2b231b; --ink:#f3e9d9; --muted:#b5a58f; --line:#4a3d2e;
+  --accent:#e07a50; --accent-ink:#1d140d; --tape:#e0b84a66; --chip:#3a2f23; --chip-on:#e07a50;
+  --c1:#4a4224; --c2:#264034; --c3:#4d2c27; --c4:#26354f; --shadow:0 6px 18px #0008;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.5;
+  background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px}
+.hand{font-family:"Caveat","Bradley Hand","Segoe Print",cursive}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+header{text-align:center;padding:18px 8px 6px}
+header h1{font-size:clamp(40px,9vw,60px);margin:0;line-height:1;color:var(--accent)}
+header p{color:var(--muted);margin:10px auto 0;max-width:520px}
+.paper{position:relative;background:var(--paper);border-radius:6px;box-shadow:var(--shadow);padding:22px 20px;margin:26px 0}
+.paper::before{content:"";position:absolute;top:-12px;left:50%;width:110px;height:26px;margin-left:-55px;background:var(--tape);transform:rotate(-2deg);border-radius:2px}
+.paper h2{margin:0 0 4px;font-size:30px}
+.sub{color:var(--muted);margin:0 0 14px;font-size:15px}
+label.f{display:block;font-weight:700;margin:14px 0 6px}
+input[type=text],select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:12px 14px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:96px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid transparent;background:var(--chip);color:var(--ink);font:inherit;font-size:15px;padding:8px 14px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--chip-on);color:var(--accent-ink);font-weight:700}
+.prompt{border-left:5px solid var(--accent);background:var(--bg);border-radius:8px;padding:12px 14px;margin:14px 0}
+.prompt .q{font-size:26px;line-height:1.1;margin:0 0 2px;color:var(--accent)}
+.prompt .h{font-size:14px;color:var(--muted);margin:0 0 8px}
+.prompt textarea{background:var(--paper)}
+.bar{position:sticky;bottom:0;padding:12px 0 6px;background:linear-gradient(transparent,var(--bg) 40%)}
+.btn{display:block;width:100%;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:700;font-size:18px;padding:15px;cursor:pointer;box-shadow:var(--shadow)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:none;width:auto;display:inline-block;font-size:15px;padding:8px 14px;margin:4px 6px 0 0}
+.progress{font-size:14px;color:var(--muted);text-align:center;margin:0 0 6px;min-height:20px}
+.msg{padding:12px 14px;border-radius:10px;background:var(--c3);margin:14px 0;font-size:15px}
+.thanks{text-align:center;padding:30px 10px}
+.thanks h2{font-size:44px;color:var(--accent)}
+.wall{columns:2 260px;column-gap:18px}
+.note{break-inside:avoid;margin:0 0 20px;padding:18px 16px 14px;border-radius:4px;box-shadow:var(--shadow);position:relative;color:var(--ink)}
+.note:nth-child(4n+1){background:var(--c1);transform:rotate(-1.2deg)}
+.note:nth-child(4n+2){background:var(--c2);transform:rotate(1deg)}
+.note:nth-child(4n+3){background:var(--c3);transform:rotate(-.6deg)}
+.note:nth-child(4n){background:var(--c4);transform:rotate(1.4deg)}
+.note::before{content:"";position:absolute;top:-9px;left:calc(50% - 38px);width:76px;height:20px;background:var(--tape);transform:rotate(2deg)}
+.note .who{font-size:28px;line-height:1;margin:0}
+.note .meta{font-size:13px;color:var(--muted);margin:2px 0 8px}
+.note h4{margin:10px 0 2px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.note p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tags span{font-size:12px;background:#ffffff66;border-radius:999px;padding:2px 9px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tags span{background:#ffffff1a}}
+:root[data-theme="dark"] .tags span{background:#ffffff1a}
+.tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.count{font-size:34px;color:var(--accent)}
+.sendbtn{display:block;text-align:center;text-decoration:none;margin:10px 0}.btn.wa{background:#1fa855;color:#fff}.preview{min-height:200px;font-size:15px;white-space:pre-wrap}.empty{text-align:center;color:var(--muted);padding:30px 10px}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:no-preference){.note{transition:transform .2s}.note:hover{transform:rotate(0) scale(1.02)}}
+
+.cover{background:linear-gradient(135deg,var(--c1),var(--c3));border-radius:14px;box-shadow:var(--shadow);padding:26px 18px;margin:8px 0 6px}
+.stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+.stat{background:var(--paper);border-radius:12px;padding:8px 16px;text-align:center;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:30px;line-height:1;color:var(--accent);font-family:"Caveat","Bradley Hand",cursive}
+.stat span{font-size:12px;color:var(--muted)}
+.av{width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:26px;float:left;margin:0 10px 6px 0}
+.note .quote{clear:both;font-size:34px;line-height:.6;color:var(--accent);margin-top:6px}
+details.paper summary{cursor:pointer;font-size:28px;color:var(--accent)}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+@media print{.row,details,.bar{display:none!important}.note{transform:none!important}}
+.filters{margin:18px 0 22px}.filters input{margin-bottom:10px}
+.pill{display:inline-block;font-size:12px;font-weight:700;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:1px 10px;margin:2px 0 0}
+.note:nth-child(n){background-image:repeating-linear-gradient(transparent 0 25px,#00000010 25px 26px);padding-top:20px}
+.note .who{font-size:30px}.note p{font-size:16px;line-height:26px}
+.cover{border:2px dashed var(--accent)}
+header{position:relative}
+header h1{background:linear-gradient(90deg,var(--accent),#e8a33d,var(--accent));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+header::before,header::after{content:"✨";position:absolute;font-size:26px;animation:float 5s ease-in-out infinite}
+header::before{left:6%;top:18px}header::after{right:6%;top:56px;animation-delay:2s}
+@keyframes float{50%{transform:translateY(-10px) rotate(12deg)}}
+@keyframes rise{from{opacity:0;translate:0 26px}to{opacity:1;translate:0 0}}
+.note,.paper,.stat{animation:rise .7s both}
+.btn.sendbtn{animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 9px #c4572f26,var(--shadow)}}
+.step{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:12px;padding:12px 14px;margin:8px 0}
+.greet{text-align:center;font-size:32px;color:var(--accent);margin:16px 0 0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="hand">Notes for Frank</h1>
+  <p>A little scrapbook of thoughts from the people I have worked with. No sign-in needed. It takes about two minutes. Honest, kind and specific is perfect.</p>
+</header>
+
+<main id="app"></main>
+</div>
+
+<script>
+
+const PROMPTS=[
+ {id:'best',q:'Frank at his best',h:'A moment, decision or day when you saw him do something well.'},
+ {id:'strength',q:'What he does well',h:'Skills, habits or qualities you rely on or admire.'},
+ {id:'impact',q:'The difference he made',h:'Something that improved because he was involved: a process, a team, patient care, results.'},
+ {id:'grow',q:'Where he can grow',h:'One or two honest suggestions. Be as direct as you like, it helps.'},
+ {id:'next',q:'Advice for his next chapter',h:'Roles, skills or choices you think suit him.'},
+ {id:'words',q:'Three words that describe him',h:'Just three words, or a short line.'}
+];
+const TRAITS=['Dependable','Calm under pressure','Strategic thinker','People first','Clear communicator','Data driven','Builds strong teams','Gets things done','Patient focused','Open to feedback','Fair and honest','Solves problems'];
+const ROLES=['Senior doctor','Administrator','Clinical leader','Other senior colleague'];
+const app=document.getElementById('app');let db=null,owner=false,uid=null,notes=[],mode='form',unsub=null,msg='',filter='All',q='';
+let state={sel:new Set(),role:'',name:'',rel:'',ans:{},free:''},view='form',text='';
+function el(tag,attrs,...kids){const e=document.createElement(tag);
+  for(const k in (attrs||{})){ if(k==='class')e.className=attrs[k]; else if(k.startsWith('on'))e.addEventListener(k.slice(2),attrs[k]); else if(attrs[k]!==false&&attrs[k]!=null)e.setAttribute(k,attrs[k]); }
+  kids.flat().forEach(c=>{ if(c==null)return; e.append(c.nodeType?c:document.createTextNode(c)); }); return e; }
+function phone(){const h=(location.hash||'').replace('#','');return /^\d{8,15}$/.test(h)?h:'';}
+function filled(){return Object.values(state.ans).filter(v=>v&&v.trim()).length+(state.free.trim()?1:0);}
+function build(){
+  let t='Hello Frank, here is my note for your scrapbook.\n\nFrom: '+state.name.trim()+(state.role?' ('+state.role+')':'')+'\n';
+  if(state.rel.trim())t+='Known you: '+state.rel.trim()+'\n';
+  PROMPTS.forEach(p=>{const v=(state.ans[p.id]||'').trim(); if(v)t+='\n'+p.q+':\n'+v+'\n';});
+  if(state.free.trim())t+='\nIn my words:\n'+state.free.trim()+'\n';
+  if(state.sel.size)t+='\nTags: '+[...state.sel].join(', ')+'\n';
+  return t;
+}
+
+function esc(s){return s}
+function noteCard(n){
+  const meta=[n.role,n.rel].filter(Boolean).join(' · ');
+  const d=n.ts?new Date(n.ts).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'';
+  return el('article',{class:'note'},
+    el('div',{class:'av hand'},((n.name||'?').trim()[0]||'?').toUpperCase()),
+    el('p',{class:'who hand'},n.name||'Anonymous'),n.role?el('span',{class:'pill'},n.role):null,
+    el('p',{class:'meta'},[meta,d].filter(Boolean).join(' · ')),
+    PROMPTS.filter(p=>n.answers&&n.answers[p.id]).map(p=>[el('h4',{},p.q),el('p',{},n.answers[p.id])]),
+    n.free?[el('h4',{},'In their words'),el('p',{},n.free)]:null,
+    n.tags&&n.tags.length?el('div',{class:'tags'},n.tags.map(t=>el('span',{},t))):null);
+}
+function parse(t,fb){
+  const d={name:fb||'',role:'',rel:'',traits:[],answers:{},free:''};
+  const lines=t.replace(/\r/g,'').split('\n');let cur=null,buf=[];
+  const flush=()=>{const v=buf.join('\n').trim();if(cur&&v){if(cur==='free')d.free=v;else d.answers[cur]=v;}buf=[];};
+  for(const raw of lines){const l=raw.trim();let m;
+    if((m=l.match(/^From:\s*(.*?)\s*(?:\((.*)\))?$/i))){flush();cur=null;d.name=m[1]||d.name;d.role=m[2]||'';continue;}
+    if((m=l.match(/^Known you:\s*(.*)$/i))){flush();cur=null;d.rel=m[1];continue;}
+    if((m=l.match(/^Tags:\s*(.*)$/i))){flush();cur=null;d.traits=m[1].split(',').map(s=>s.trim()).filter(Boolean);continue;}
+    if(/^In my words:?$/i.test(l)){flush();cur='free';continue;}
+    const p=PROMPTS.find(p=>l.toLowerCase()===p.q.toLowerCase()+':');
+    if(p){flush();cur=p.id;continue;}
+    if(/^Hello Frank/i.test(l))continue;
+    if(cur)buf.push(raw);else if(l){cur='free';buf.push(raw);}
+  }
+  flush();return d;
+}
+async function submitDirect(){
+  const go=document.getElementById('go');go.disabled=true;go.textContent='Saving...';
+  const answers={};PROMPTS.forEach(p=>{const v=(state.ans[p.id]||'').trim();if(v)answers[p.id]=v;});
+  const d={name:state.name.trim(),role:state.role,rel:state.rel.trim(),traits:[...state.sel],answers,free:state.free.trim(),ts:Date.now()};
+  try{await db.doc('notes/'+uid).set(d);view='thanks';render();}
+  catch(e){view='send';render();}
+}
+function renderThanks(){
+  app.append(el('section',{class:'paper thanks'},el('h2',{class:'hand'},'Thank you'),el('p',{},'Your note is now stuck into Frank’s scrapbook. It means a lot to him.'),
+    el('button',{class:'btn ghost',onclick:()=>{view='form';render();}},'Edit my note (this replaces the earlier one)')));
+}
+function shown(){const k=q.trim().toLowerCase();return notes.filter(n=>(filter==='All'||(n.tags||[]).includes(filter))&&(!k||JSON.stringify(n).toLowerCase().includes(k)));}
+function tagged(n){const a=n.answers||{};n.tags=[...(n.traits||[])];if(n.role)n.tags.push(n.role);if(a.grow)n.tags.push('Growth feedback');if(a.best)n.tags.push('Story');if(a.next)n.tags.push('Career advice');n.tags=[...new Set(n.tags)];return n;}
+function renderLanding(){
+  document.querySelector('header h1').textContent='Notes for Frank';
+  document.querySelector('header p').textContent='I would be grateful for a few honest words from you. It takes about two minutes, and only I will read them.';
+  const w=el('div');
+  if(owner&&db)w.append(el('div',{class:'row'},el('button',{class:'btn ghost',onclick:()=>{mode='book';render();}},'Back to my scrapbook')));
+  w.append(el('section',{class:'paper'},el('h2',{class:'hand'},'How it works'),
+    el('p',{class:'step'},'👆 Tap the button below'),el('p',{class:'step'},'🏷️ Add your name and tap a few words that fit me'),el('p',{class:'step'},'✍️ Write a line or two. One answer is enough'),
+    el('a',{class:'btn sendbtn',style:'margin-top:16px',href:'https://www.surveymonkey.com/r/3ZBS9XT',target:'_blank',rel:'noopener'},'Write my note for Frank'),
+    el('p',{class:'sub',style:'margin-top:12px'},'No sign-in needed. Your note is private and goes only to Frank.')));
+  app.append(w);
+}
+function listen(){
+  if(!db||unsub)return;
+  try{unsub=db.collection('notes').onSnapshot(s=>{notes=s.docs.map(d=>tagged({id:d.id,...d.data()})).sort((a,b)=>(b.ts||0)-(a.ts||0));if(mode==='book')render();},()=>{});}catch(e){}
+}
+async function addNote(){
+  const t=document.getElementById('paste').value,nm=document.getElementById('pn').value.trim();
+  if(!t.trim()){msg='Paste a note first.';return render();}
+  const d=parse(t,nm);if(!d.name)d.name='A well wisher';
+  try{await db.collection('notes').add({...d,ts:Date.now()});msg='Added to your scrapbook.';}catch(e){msg='Could not save. Please try again.';}
+  render();
+}
+function wallNode(l){return el('div',{class:'wall'},(l||notes).map((n,i)=>{const c=noteCard(n);c.style.animationDelay=Math.min(i*80,800)+'ms';return c;}));}
+function mementoHtml(){
+  const css=document.querySelector('style').textContent;
+  const w=document.createElement('div');w.append(wallNode());
+  return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Notes for Frank: Memento</title><style>'+css+'</style></head><body><div class="wrap"><header><h1 class="hand">Notes for Frank</h1><p>A keepsake of kind words from colleagues. '+notes.length+' notes, saved '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})+'.</p></header>'+w.innerHTML+'</div></body></html>';
+}
+async function save(kind){
+  let data,fn;
+  if(kind==='html'){data=mementoHtml();fn='notes-for-frank-memento.html';}
+  else{data='NOTES FOR FRANK\n\n'+notes.map(n=>'== '+n.name+(n.role?' ('+n.role+')':'')+' ==\n'+(n.rel?n.rel+'\n':'')+PROMPTS.filter(p=>n.answers&&n.answers[p.id]).map(p=>'\n'+p.q+':\n'+n.answers[p.id]).join('\n')+(n.free?'\n\nIn their words:\n'+n.free:'')+(n.traits&&n.traits.length?'\n\nTags: '+n.traits.join(', '):'')).join('\n\n\n');fn='notes-for-frank.txt';}
+  try{const d=await claude.use('downloads');if(d)await d.save({filename:fn,data});}catch(e){}
+}
+function renderBook(){
+  document.querySelector('header h1').textContent='Frank’s Scrapbook of Kind Words';
+  document.querySelector('header p').textContent='Visible only to you. Every note keeps adding here. Save a copy any time as a keepsake.';
+  const cnt=r=>notes.filter(n=>n.role===r).length;
+  const wrap=el('div');
+  wrap.append(el('p',{class:'greet hand'},notes.length?notes.length+(notes.length===1?' kind word is':' kind words are')+' waiting for you':'Your first kind word will appear here'),el('div',{class:'stats'},
+    el('div',{class:'stat'},el('b',{},String(notes.length)),el('span',{},'notes')),
+    el('div',{class:'stat'},el('b',{},String(cnt('Senior doctor')+cnt('Clinical leader'))),el('span',{},'doctors and clinical leaders')),
+    el('div',{class:'stat'},el('b',{},String(cnt('Administrator'))),el('span',{},'administrators'))));
+  wrap.append(el('div',{class:'row'},
+    el('button',{class:'btn ghost',onclick:()=>save('html')},'Save memento (web page)'),
+    el('button',{class:'btn ghost',onclick:()=>save('txt')},'Save as text'),
+    el('button',{class:'btn ghost',onclick:()=>window.print()},'Print or PDF'),
+    el('button',{class:'btn ghost',onclick:()=>{mode='form';render();}},'See visitor page')));
+
+  const holder=el('div');
+  const draw=()=>{holder.replaceChildren(shown().length?wallNode(shown()):el('div',{class:'empty'},notes.length?'No notes match.':'Your wall is empty for now. Share this page’s link. New notes appear here after I sync them from the form.'));};
+  const roles=['All',...new Set(notes.flatMap(n=>n.tags||[]))];
+  wrap.append(el('div',{class:'filters'},el('input',{type:'text',placeholder:'Search names or words',value:q,oninput:e=>{q=e.target.value;draw();}}),
+    el('div',{class:'chips'},roles.map(r=>el('button',{class:'chip',type:'button','aria-pressed':String(filter===r),onclick:()=>{filter=r;render();}},r)))),holder);
+  draw();
+  app.append(wrap);
+}
+function render(){
+  app.replaceChildren();
+  if(mode==='book')return renderBook();
+  renderLanding();window.scrollTo(0,0);
+}
+function renderForm(){
+  const wrap=el('div');
+  wrap.append(
+    el('section',{class:'paper'},
+      el('h2',{class:'hand'},'First, who is writing?'),
+      el('p',{class:'sub'},'Your note goes only to Frank.'),
+      el('label',{class:'f',for:'nm'},'Your name'),
+      el('input',{type:'text',id:'nm',placeholder:'e.g. Dr. A. Sharma',value:state.name,oninput:e=>{state.name=e.target.value;upd();}}),
+      el('label',{class:'f'},'You are a'),
+      el('div',{class:'chips'},ROLES.map(r=>el('button',{class:'chip','aria-pressed':String(state.role===r),type:'button',onclick:e=>{state.role=state.role===r?'':r;[...e.currentTarget.parentNode.children].forEach(c=>c.setAttribute('aria-pressed',String(c.textContent===state.role)));}},r))),
+      el('label',{class:'f',for:'rl'},'How do you know Frank? (optional)'),
+      el('input',{type:'text',id:'rl',placeholder:'e.g. Worked together on the lab expansion, 5 years',value:state.rel,oninput:e=>{state.rel=e.target.value;}})),
+    el('section',{class:'paper'},
+      el('h2',{class:'hand'},'Tap what fits him'),
+      el('p',{class:'sub'},'Pick as many as you like. Takes ten seconds.'),
+      el('div',{class:'chips'},TRAITS.map(t=>el('button',{class:'chip','aria-pressed':String(state.sel.has(t)),type:'button',onclick:e=>{state.sel.has(t)?state.sel.delete(t):state.sel.add(t);e.currentTarget.setAttribute('aria-pressed',String(state.sel.has(t)));}},t)))),
+    el('section',{class:'paper'},
+      el('h2',{class:'hand'},'Write a little'),
+      el('p',{class:'sub'},'Answer any that spark something. One is enough.'),
+      PROMPTS.map(p=>el('div',{class:'prompt'},
+        el('p',{class:'q hand'},p.q),el('p',{class:'h'},p.h),
+        el('textarea',{'aria-label':p.q,placeholder:'Write here...',oninput:e=>{state.ans[p.id]=e.target.value;upd();}},state.ans[p.id]||''))),
+      el('label',{class:'f',for:'fr'},'Anything else you would like to say?'),
+      el('textarea',{id:'fr',placeholder:'Free space, your words.',oninput:e=>{state.free=e.target.value;upd();}},state.free)),
+    el('div',{class:'bar'},el('div',{class:'progress',id:'prog'}),el('button',{class:'btn',id:'go',type:'button',onclick:()=>{text=build();if(db&&uid&&!owner)submitDirect();else{view='send';render();}}},db&&uid&&!owner?'Add my note to the scrapbook':'Next: send it to Frank')));
+  app.append(wrap); upd();
+}
+function upd(){
+  const go=document.getElementById('go'),pr=document.getElementById('prog'); if(!go)return;
+  const n=filled(), ok=state.name.trim()&&n>0; go.disabled=!ok;
+  pr.textContent=!state.name.trim()?'Add your name to begin':n===0?'Write at least one thing':n+(n===1?' thought':' thoughts')+' written. Thank you!';
+}
+async function copyText(btn){
+  let ok=false;
+  try{ await navigator.clipboard.writeText(text); ok=true; }catch(e){}
+  if(!ok){ const ta=document.getElementById('pv'); ta.focus(); ta.select(); try{ ok=document.execCommand('copy'); }catch(e){} }
+  btn.textContent=ok?'Copied. Now paste it to Frank':'Press and hold the text above to copy';
+}
+function renderSend(){
+  const ph=phone(), wrap=el('div');
+  const sec=el('section',{class:'paper'},
+    el('h2',{class:'hand'},'Your note is ready'),
+    el('p',{class:'sub'},ph?'One tap sends it to Frank on WhatsApp. Just press Send in WhatsApp.':'Tap WhatsApp, choose Frank from your contacts, and press Send.'));
+  sec.append(el('a',{class:'btn wa sendbtn',href:'https://wa.me/'+(ph?ph:'')+'?text='+encodeURIComponent(text),target:'_blank',rel:'noopener'},ph?'Send to Frank on WhatsApp':'Share on WhatsApp'));
+  if(navigator.share) sec.append(el('button',{class:'btn sendbtn',type:'button',onclick:()=>{navigator.share({text}).catch(()=>{});}},'Share via email or any app'));
+  const cb=el('button',{class:'btn ghost',type:'button'},'Copy my note'); cb.addEventListener('click',()=>copyText(cb));
+  sec.append(el('textarea',{id:'pv',class:'preview',readonly:true,'aria-label':'Your note'},text),el('div',{style:'margin-top:10px'},cb,el('button',{class:'btn ghost',type:'button',onclick:()=>{view='form';render();}},'Edit my note')));
+  wrap.append(sec,el('div',{class:'empty'},'Thank you for taking the time. It truly means a lot.'));
+  if(!ph) wrap.append(el('p',{class:'sub',style:'text-align:center'},'Setup for Frank: add your WhatsApp number to the end of this page’s link, with country code and no plus sign, e.g. #919876543210'));
+  app.append(wrap);
+}
+
+async function init(){
+  let user=null;
+  try{user=await claude.use('user');if(user){owner=await user.isOwner();uid=await user.id();db=await claude.use('db');}}catch(e){}
+  if(owner&&db){mode='book';listen();}
+  render();
+}
+init();
+</script>
+</body>
+</html>
